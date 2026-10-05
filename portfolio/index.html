@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- google fonts読み込み -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100..900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/style.css">
+  <title>camp</title>
+</head>
+<body>
+
+  <header>
+  <div>
+    <h1><a href="index.html"><img src="image/logo.png" alt="camp" class="logo"></a></h1>
+    <nav>
+      <ul>
+        <li><a href="works.html">works</a></li>
+        <li><a href="about.html">about</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main>
+  
+<div class="campfire">
+  <div class="glow"></div>
+
+  <div class="fire" id="fire"></div>
+</div>
+
+</main>
+
+
+<!-- 
+↓重いため中止、CSSでのアニメに変更 -->
+  <!-- <div class="campfire">
+    
+    <div class="glow"></div>
+  
+    
+    <img src="image/fire1.png" alt="焚き火の炎" class="fire" id="fire">
+  </div>
+<script>
+  const fire = document.getElementById("fire");
+  const order = [
+    "image/fire1.png",
+    "image/fire2.png",
+    "image/fire3.png",
+    "image/fire1.png",
+    "image/fire3.png",
+    "image/fire2.png",
+    "image/fire1.png",
+    "image/fire3.png"
+  ];
+  
+  let current = 0;
+  
+  function randomFire() {
+    // 次の画像のインデックスを計算（% 演算子を使うとif文を消せてスッキリします）
+    current = (current + 1) % order.length;
+    fire.src = order[current];
+    
+    setTimeout(randomFire, 700);
+  }
+  
+  randomFire();
+</script> --> 
+
+
+
+  <footer>
+    <p>&copy; 2026</p>
+  </footer>
+
+</body>
+</html>

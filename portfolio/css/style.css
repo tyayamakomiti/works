@@ -1,0 +1,183 @@
+@charset "UTF-8";
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  letter-spacing: 0.1em;
+  line-height: 1.7;
+  font-family: 'Noto Sans JP', sans-serif;
+  margin: 0;
+  background: #01151f;
+  min-height: 100vh;
+  /* bodyでの中央寄せを削除し、ポジションの基準とします */
+  position: relative;
+  overflow: hidden;
+}
+
+/* ======================
+   ヘッダーを左上に固定する設定
+====================== */
+header {
+  position: absolute; /* 画面全体の左上に固定 */
+  /* ↓上から半分の位置 */
+  top: 50%;
+  left: 0;
+  /* 自身の高さの半分だけ上にずらして完全に中央へ */
+  transform: translateY(-50%);
+  z-index: 10;        /* 炎や灯りよりも手前に表示してクリック可能にする */
+  padding: 20px;
+}
+
+header div {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; /* 左寄せ (leftではなくflex-start) */
+}
+
+header nav ul {
+  list-style: none; /* ドット（黒丸）を消す */
+  padding: 0;
+  margin: 10px 0 0 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+header nav ul li a {
+  font-size: 16px;
+  display: block;
+  color: #fff; /* 背景が黒なので文字を白に変更 */
+  text-decoration: none;
+  line-height: 1;
+  padding: 10px;
+  border-bottom: 1px solid transparent;
+  transition: 0.4s;
+}
+
+header nav ul li a:hover {
+  border-bottom: 1px solid #fff;
+}
+
+.logo {
+  width: 100px;
+}
+
+footer {
+  position: absolute;
+  bottom: 0;          /* 画面の一番下に固定 */
+  left: 0;
+  width: 100%;        /* 横幅いっぱいに広げる */
+  text-align: center; /* フッター内の文字を中央寄せに */
+  padding: 20px 0;
+  color: #fff;        
+  z-index: 10;
+}
+
+/* ======================
+   メインコンテンツ（焚き火）を中央に配置する
+====================== */
+main {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); /* 画面の正中央に配置 */
+  z-index: 1;
+}
+
+.campfire {
+  position: relative;
+  width: 420px;
+  height: 420px;
+}
+
+/* ======================
+   灯り（重なり順を一番下に）
+====================== */
+.glow {
+  position: absolute;
+  left: 50%;
+  top: 55%;
+  width: 1000px;
+  height: 1000px;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(255,140,30,0.62) 0%,
+    rgba(255,120,20,0.12) 25%,
+    rgba(255,80,0,0.08) 45%,
+    rgba(255,60,0,0.02) 60%,
+    rgba(255,50,0,0) 75%
+  );
+  filter: blur(120px);
+  z-index: 1; /* 重なり順を低くする */
+  animation:
+    glowPulse 6s ease-in-out infinite,
+    glowShift 9s ease-in-out infinite;
+}
+
+/* ======================
+   炎（★ここを修正）
+====================== */
+.fire {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  /* object-fitの代わりに背景画像の調整を追加 */
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center bottom; 
+  
+  transform-origin: center bottom;
+  will-change: transform;
+  z-index: 2;
+
+  /* ★パラパラアニメーション（5.6秒ループ）を追加 */
+  animation: flicker 5.6s steps(1) infinite;
+}
+
+/* ======================
+   アニメーション（★flickerを追加）
+====================== */
+@keyframes flicker {
+  0%   { background-image: url('../image/fire1.png'); }
+  12.5% { background-image: url('../image/fire2.png'); }
+  25%   { background-image: url('../image/fire3.png'); }
+  37.5% { background-image: url('../image/fire1.png'); }
+  50%   { background-image: url('../image/fire3.png'); }
+  62.5% { background-image: url('../image/fire2.png'); }
+  75%   { background-image: url('../image/fire1.png'); }
+  87.5% { background-image: url('../image/fire3.png'); }
+  100%  { background-image: url('../image/fire1.png'); }
+}
+
+@keyframes glowPulse {
+  0% { opacity: 0.65; }
+  25% { opacity: 0.95; }
+  50% { opacity: 0.75; }
+  75% { opacity: 1; }
+  100% { opacity: 0.65; }
+}
+
+@keyframes glowShift {
+  0% { transform: translate(-50%, -50%) scale(1); }
+  50% { transform: translate(-50%, -50%) scale(1.08); }
+  100% { transform: translate(-50%, -50%) scale(1); }
+}
+
+/* レスポンシブ */
+@media screen and (max-width: 768px) {
+  header nav ul li a {
+    font-size: 14px;
+  }
+}
+
+/* レスポンシブ */
+@media screen and (max-width: 768px) {
+  header nav ul li a {
+    font-size: 14px;
+  }
+}
